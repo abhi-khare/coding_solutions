@@ -10,7 +10,7 @@ func main() {
 	// <variableName> := [array_size]<data_type>{[optional initialisation]}
 	// If not initialised by the users, arrays get initialised by default values Ex: 0 for int/floats and "" for string
 
-	var intArr = [3]int{}
+	var intArr = [3]int
 	var floatArr = [5]float64{}
 
 	intArr_2 := [3]int{}
