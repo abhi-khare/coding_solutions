@@ -1,17 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 
 	// Just like other general purpose PLs, Go allows users to create fixed sized arrays of in-built and user created data types.
-	// We can create arrays of type int16/32/64, float32/34, string etc. using following two methods:
+	// We can create arrays of type int16/32/64, float32/34, string etc. using following three methods:
 	// var <variableName> = [array_size]<data_type>{[optional initialisation]}
 	// <variableName> := [array_size]<data_type>{[optional initialisation]}
+	// var <variableName>  [array_size]<data_type>
 	// If not initialised by the users, arrays get initialised by default values Ex: 0 for int/floats and "" for string
 
-	var intArr = [3]int
+	var intArr = [3]int{}
 	var floatArr = [5]float64{}
+	var Arr [3]int32
 
 	intArr_2 := [3]int{}
 	strArray := [10]string{}
@@ -27,6 +31,6 @@ func main() {
 
 	charArr := [3]rune{'a', 'b', 'c'}
 
-	fmt.Println(intArr, intArr_2, floatArr, strArray, arrFloat, charArr)
+	fmt.Println(intArr, intArr_2, floatArr, strArray, arrFloat, charArr, Arr)
 
 }
