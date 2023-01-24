@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 
 	// We can use slice to create stack. Stack mainly contains two operations
-	// push and pop. We can use append and : operator to mimic push and pop.
+	// push and pop in LIFO manner. We can use append and : operator to mimic push and pop.
 	// While popping an element using : operator we need to make sure that it has
 	// atleast 1 element to be popped.
 
