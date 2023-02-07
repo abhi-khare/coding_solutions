@@ -4,26 +4,29 @@ import "fmt"
 
 func minimumElement(arr []int) int {
 
-	start, end := 0, len(arr)
+	if arr[0] < arr[len(arr)-1]{
+		return arr[0]
+	} else {
+		start, end := 0, len(arr)-1
 
-	for start < end {
-		mid := (start + end) / 2
-
-		if arr[mid] < arr[(mid-1)%len(arr)] || arr[mid] > arr[(mid+1)%len(arr)] {
-			return mid
-		} else if arr[0] > arr[(mid)%len(arr)] {
-			end = mid - 1
-		} else {
-			start = mid + 1
+		for start < end {
+			mid := (start + end) / 2
+			if arr[mid] < arr[mid-1] {
+				return arr[mid]
+			}  else if arr[mid] < arr[0] && arr[mid] < arr[len(arr)-1] {
+				
+			} else if arr[mid] < arr[0] && arr[mid] < arr[len(arr)-1] {
+			
+			} 
 		}
-	}
 
-	return 1
+		return arr[0]
+	}
 }
 
 func main() {
 
-	var arr = []int{}
+	var arr = []int{3,4,5,1,2}
 
 	minEle := minimumElement(arr)
 
