@@ -34,6 +34,7 @@ func main() {
 	dynSlice = append(dynSlice, 2)
 
 	rt := reflect.TypeOf(dynSlice)
+
 	switch rt.Kind() {
 	case reflect.Slice:
 		fmt.Println("is a slice with element type", rt.Elem())
