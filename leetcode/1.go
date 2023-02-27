@@ -1,15 +1,22 @@
 package main
 
-import "sort"
+import (
+	"sort"
+)
 
-func binarySearch(arr []int, start int, end int, target int) int {
+type element struct {
+	val int
+	idx int
+}
+
+func bSearch(arr []element, start int, end int, target int) int {
 
 	for start <= end {
 		mid := (start + end) / 2
 
-		if arr[mid] == target {
+		if arr[mid].val == target {
 			return mid
-		} else if arr[mid] < target {
+		} else if arr[mid].val < target {
 			start = mid + 1
 		} else {
 			end = mid - 1
@@ -21,23 +28,24 @@ func binarySearch(arr []int, start int, end int, target int) int {
 
 func main() {
 
-	nums := []int{3, 3}
-	tempNums := make([]int, len(nums))
-	target := 6
+	nums := []int{2, 11, 7, 15}
+	tempNums := make([]element, len(nums))
+	target := 9
 
 	for iter, ele := range nums {
-		tempNums[iter] = ele
+		tempNums[iter].val = ele
+		tempNums[iter].idx = iter
 	}
 
 	sort.Slice(tempNums, func(i, j int) bool {
-		return tempNums[i] < tempNums[j]
+		return tempNums[i].val < tempNums[j].val
 	})
 
 	idx, jdx := 0, 0
 
 	for iter := 0; iter < len(tempNums)-1; iter++ {
 
-		jdx = binarySearch(tempNums, iter+1, len(tempNums)-1, target-tempNums[iter])
+		jdx = bSearch(tempNums, iter+1, len(nums)-1, target-tempNums[iter].val)
 
 		if jdx != -1 {
 			idx = iter
@@ -45,17 +53,7 @@ func main() {
 		}
 	}
 
-	print(idx, jdx)
-
-	ans1, ans2 := 0, 0
-
-	for iter, ele := range nums {
-		if ele == tempNums[idx] {
-			ans1 = iter
-		}
-		if ele == tempNums[jdx] {
-			ans2 = iter
-		}
+	if idx != -1 && jdx != -1 {
+		print(tempNums[idx].idx, tempNums[jdx].idx)
 	}
-	print(ans1, ans2)
 }
