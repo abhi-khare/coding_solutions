@@ -13,7 +13,7 @@ func main() {
 	// var <variableName>  [array_size]<data_type>
 	// If not initialised by the users, arrays get initialised by default values Ex: 0 for int/floats and "" for string
 
-	var intArr = [3]int{}
+	var intArr = [3]int{1,2}
 	var floatArr = [5]float64{}
 	var Arr [3]int32
 
@@ -31,6 +31,8 @@ func main() {
 
 	charArr := [3]rune{'a', 'b', 'c'}
 
-	fmt.Println(intArr, intArr_2, floatArr, strArray, arrFloat, charArr, Arr)
+	strArr := [4]string{"I", "am", "abhinash"}
+
+	fmt.Println(intArr, intArr_2, floatArr, strArray, arrFloat, charArr, Arr, strArr)
 
 }
