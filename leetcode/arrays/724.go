@@ -19,22 +19,32 @@ func getPrefixSum(arr []int) ([]int, []int){
 
 }
 
-
 func pivotIndex(nums []int) int {
-    
-	leftSum, rightSum := getPrefixSum(nums)
 
-	for iter:=0; iter<len(nums); iter++{
-		
+    
+	leftPrefixSum, rightPrefixSum := getPrefixSum(nums)
+
+	pivot := 0
+	for pivot < len(nums){
+		leftSum := leftPrefixSum[pivot] - nums[pivot]
+		rightSum := rightPrefixSum[pivot] - nums[pivot]
+
+		if leftSum == rightSum{
+			return pivot
+		}
+
+		pivot +=1
 	}
+
+	return -1
 }
+
 
 
 func main(){
 
-	nums := []int{1,7}
+	nums := []int{0,2}
 
-	idx := pivotIndex(nums)
-	a,b := getPrefixSum(nums)
-	fmt.Println(idx,a,b)
+	pivot := pivotIndex(nums)
+	fmt.Println(pivot)
 }

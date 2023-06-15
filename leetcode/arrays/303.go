@@ -2,46 +2,45 @@ package main
 
 import "fmt"
 
-func findDifference(nums1 []int, nums2 []int) [][]int {
-
-	ans1 := []int{}
-	ans2 := []int{}
-	hashMap1 := make(map[int]int)
-	hashMap2 := make(map[int]int)
-	
-	for _, ele := range nums1{
-		hashMap1[ele] = 0
-	}
-
-	for _, ele := range nums2{
-		hashMap2[ele] = 0
-	}
-
-	for ele,_ := range hashMap1{
-		if _, ok := hashMap2[ele]; !ok{
-			ans1 = append(ans1, ele)
-		}
-	}
-
-	
-	for ele, _ := range hashMap2{
-		if _, ok := hashMap1[ele]; !ok{
-			ans2 = append(ans2, ele)
-		}
-	}
-
-	return [][]int{ans1, ans2}
-	
-
+type NumArray struct {
+	arr []int
 }
 
-func main() {
+func Constructor(nums []int) NumArray {
+	var prefixSum NumArray
+	sum := 0
+	for _, ele := range nums {
+		sum += ele
+		prefixSum.arr = append(prefixSum.arr, sum )
+	}
 
-	nums1 := []int{1,2,3,3}
-	nums2 := []int{1, 1,2,2}
+	return prefixSum
+}
 
-	ans := findDifference(nums1, nums2)
+func (this *NumArray) SumRange(left int, right int) int {
 
-	fmt.Println(ans)
+	if left == 0{
+		return this.arr[right]
+	} else{
+		return this.arr[right] - this.arr[left-1]
+	}
+
+	
+    
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * obj := Constructor(nums);
+ * param_1 := obj.SumRange(left,right);
+ */
+
+func main(){
+
+	temp := Constructor([]int{-2,2})
+
+	param_1 := temp.SumRange(1,1)
+
+	fmt.Println(param_1)
 
 }

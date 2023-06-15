@@ -2,46 +2,39 @@ package main
 
 import "fmt"
 
-func max(a int, b int) int{
-	if a >b{
-		return a
-	}
 
-	return b
-}
-func getPreProcessedArray(arr []int) []int{
-	preProcessArray := make([]int, len(arr))
-	preProcessArray[len(arr)-1] = -1
-	var nextGreatest int = -1
+func getPreProcessedArray(arr []int) map[int]int{
+	stack := []int{1000000}
+	hashMap := make(map[int]int)
 
-	for iter:= len(arr)-2; iter>=0; iter--{
+	for _ , ele := range arr{
 
-		if arr[iter+1] > arr[iter]{
-			preProcessArray[iter] = arr[iter+1]
-		} else if nextGreatest > arr[iter]{
-			preProcessArray[iter] = preProcessArray[]
-		}
-		greaterEle := max(nextGreatest, arr[iter+1])
-		if greaterEle > arr[iter]{
-			preProcessArray[iter] = greaterEle
-			nextGreatest = greaterEle
+		topEle := stack[len(stack)-1]
+		if ele < topEle{
+			stack = append(stack, ele)
 		} else{
-			preProcessArray[iter] = -1
+			for topEle < ele{
+				hashMap[topEle] = ele
+				stack = stack[:len(stack)-1]
+				topEle = stack[len(stack)-1]
+			}
+			stack = append(stack, ele)
 		}
 	}
 
-	return preProcessArray
+	for _, ele := range stack{
+		hashMap[ele] = -1
+	}
+
+	return hashMap
+
 }
 
 func nextGreaterElement(nums1 []int, nums2 []int) []int {
 
-	hashMap := make(map[int]int)
 
-	preProcessArray := getPreProcessedArray(nums2)
+	hashMap := getPreProcessedArray(nums2)
 
-	for idx, ele := range nums2{
-		hashMap[ele] = preProcessArray[idx]
-	}
 
 	for idx, val := range nums1{
 		nums1[idx] = hashMap[val]
@@ -53,10 +46,10 @@ func nextGreaterElement(nums1 []int, nums2 []int) []int {
 
 func main() {
 
-	//nums1 := []int{4, 1, 2}
-	nums2 := []int{5,3,7,8, 7}
+	nums1 := []int{3}
+	nums2 := []int{3}
 
-	ans := getPreProcessedArray( nums2)
+	ans := nextGreaterElement(nums1, nums2)
 
 	fmt.Println(ans)
 
